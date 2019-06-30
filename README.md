@@ -1,7 +1,76 @@
-# busking
+﻿# 의료정보제공 서비스에서의 검색어 분석 처리기 개발
 
-## 기획의도 
-평소 버스킹에 관한 정보를 각각의 버스킹 그룹의 sns등을 찾아봐야하는 불편함을 해소함과 동시에 의사소통도 원활하게 하는 것.
-각각 찾아봐야했던 정보를 한곳에 취합함으로써, 버스커들은 홍보, 정보제공, sns공유, 팬들과의 의사소통 등이 편해지게 됩니다.
-또한 일반사용자들은 다양한 버스커들에 대한 정보를 얻을 수 있고, 버스커와의 의사소통이 가능한 게시판등을 통해 흥미를 느끼게 됩니다.
-이를 통하여 버스킹 문화를 활성화시키는 것이 프로젝트의 목적입니다.
+
+## ELK
+
+### elasticsearch에 logstash를 통해 json 파일 업로드 시키는 방법
+
+elasticsearch에서 제공하는 nori_tokenizer를 이용하기 위해 index의 settings을 먼저 설정해준다
+
+<pre><code>
+PUT index명
+
+{
+  "settings": {
+    "index": {
+      "analysis": {
+        "tokenizer": {
+          "nori_user_dict": {
+            "type": "nori_tokenizer",
+            "decompound_mode": "mixed",
+            "tokenizer" : "nori_tokenizer"
+          }
+        },
+        "analyzer": {
+          "my_analyzer": {
+            "type": "custom",
+            "tokenizer": "nori_user_dict"
+          }
+        }
+      }
+    }
+  }
+}
+</code></pre>
+
+### Query
+
+<pre><code>
+input {
+  
+	file {
+    
+	path => "C:/Users/kyujo/disease_final.json"
+    
+	start_position => "beginning"
+   
+	sincedb_path => "nul"
+ 
+	 codec => json {
+      charset => "UTF-8"
+    }
+ 
+	 }
+
+}
+
+filter{
+   mutate{
+       remove_field => [ "_id" ]
+   }
+}
+output {
+  
+	elasticsearch {
+
+	hosts => ["http://127.0.0.1:9200"]
+	index => "nnn" 
+	document_type => "disease"
+ 	document_id => "%{id}"
+	}
+
+	stdout {
+	}
+
+}
+</code></pre>

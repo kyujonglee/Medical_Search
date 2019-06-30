@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="ko">
+<head>
+    <title> Mathcoding_Search Engine </title>
+
+    <meta charset="utf-8">
+    <meta name="description" content="Medical search engine by Elastic Search">
+    <meta name="author" content="Mathcoding">
+
+    <link href='{% static "css/sss.css" %}' rel="stylesheet" >
+    {#    <link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">#}
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+</head>
+<body>
+    <div id="back1">
+        <img src='{% static "img/background1.jpg" %}' height="100%" width="100%">
+    </div>
+    <div id="back2">
+        <a style="text-decoration: none;" class="con_link" onmouseover="this.style.textDecoration='none';" onmouseout="this.style.textDecoration='none';" href="{% url 'index' %}">
+        <img src='{% static "img/math_coding2.png" %}' height="100%" width="100%">
+        </a>
+    </div>
+
+
+    <form method="POST"
+          action="{% url 'result' %}"
+          enctype="mult ipart/form-data">
+        <div class="searchbox">
+            <input type="text" name="input_Symptom" placeholder=" Type to Symptom.." >
+            {% csrf_token %}
+            <button type="submit" style="background-image:url('{% static "img/search2.png" %}')">
+            </button>
+        </div>
+    </form>
+
+</body>
+</html>
