@@ -77,6 +77,12 @@ output {
 }
 </code></pre>
 
+[![Main](/image/메인페이지.png)](메인페이지)
+[![Main](/image/검색결과1.png)](메인페이지)
+[![Main](/image/검색결과2.png)](메인페이지)
+[![Main](/image/검색결과3.png)](메인페이지)
+[![Main](/image/검색결과4.png)](메인페이지)
+
 ## 소감
 ```
 기업에서 검색이 잘 될 수 있도록 요구하여서 ELK을 이용하기로 하였습니다. 
